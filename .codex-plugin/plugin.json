@@ -1,0 +1,12 @@
+{
+  "name": "voiceprint",
+  "version": "1.0.0",
+  "description": "Train Claude on your personal writing voice through an intensive interview, then have it write anything in your tone.",
+  "author": {
+    "name": "Horacio Leven"
+  },
+  "homepage": "https://github.com/__GHUSER__/voiceprint",
+  "repository": "https://github.com/__GHUSER__/voiceprint",
+  "license": "MIT",
+  "skills": "./skills/"
+}

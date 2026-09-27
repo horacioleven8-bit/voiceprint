@@ -1,0 +1,16 @@
+{
+  "name": "voiceprint",
+  "interface": {
+    "displayName": "voiceprint"
+  },
+  "plugins": [
+    {
+      "name": "voiceprint",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

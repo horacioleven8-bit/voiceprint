@@ -1,0 +1,25 @@
+{
+  "name": "voiceprint",
+  "owner": {
+    "name": "Horacio Leven"
+  },
+  "metadata": {
+    "description": "Train Claude on your personal writing voice through an intensive interview, then have it write anything in your tone.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "voiceprint",
+      "source": "./",
+      "description": "Train Claude on your personal writing voice through an intensive interview, then have it write anything in your tone.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Horacio Leven"
+      },
+      "homepage": "https://github.com/__GHUSER__/voiceprint",
+      "repository": "https://github.com/__GHUSER__/voiceprint",
+      "license": "MIT",
+      "category": "productivity"
+    }
+  ]
+}
