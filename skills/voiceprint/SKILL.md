@@ -12,12 +12,15 @@ description: >-
 
 This skill makes Claude take over the user's writing voice so completely that messages read as if the user wrote them. It has three modes. If the user has not been interviewed yet, always start with **Mode 1**.
 
+**This runs automatically, no slash command or explicit invocation needed.** As soon as the user asks for any message, DM, email, reply, post, or lead outreach to be written, check for a saved profile first and apply it without being asked "in my voice" specifically, writing in the user's voice is the default from then on, not an opt-in.
+
 Detect the mode from what the user says:
 - No profile yet, or "train me / interview me / lern meine Sprache" → **Mode 1: Interview**
-- "write / schreib mir ... in meinem Ton", or any content request once a profile exists → **Mode 2: Write**
+- Any request to write, draft, reply to, or send a message once a profile exists → **Mode 2: Write** (apply automatically, do not wait for "write it like me")
 - "mach das menschlich / humanize this / zieh das durch meinen Ton" + pasted text → **Mode 3: Humanize**
+- No profile yet AND a writing request comes in → do a fast 3-question mini-interview first (tone, one real sample, one banned word), then write. Offer the full interview for later.
 
-Before writing anything, check for an existing profile at `~/.claude/voiceprint/<name>-voice.md` (or the path noted in the conversation). If one exists, load it and write from it. If not, offer the interview.
+Before writing anything, check for an existing profile. Look in this order: (1) a path the user already told you in this conversation, (2) `~/.claude/voiceprint/<name>-voice.md`, (3) if the user has an Obsidian vault or a memory folder they already use for persistent notes, that also works, save and read the profile there instead so it survives across tools. Obsidian is never required, plain files work the same, it is just an option if the user already has a vault.
 
 ---
 
@@ -62,7 +65,9 @@ Work through these, in batches, adapting follow-ups to their answers:
 From the samples + answers, extract: tone, register, du/Sie, opener patterns, closer patterns, signature words, banned words, emoji rules, punctuation rules, sentence rhythm, message shape, pitch style. **Mirror it back in a short summary and ask the person to confirm or correct** before saving.
 
 ### Step 4 — Save the profile
-Write the confirmed profile to `~/.claude/voiceprint/<name>-voice.md` (create the folder if needed) using the template below. Tell the person it is saved and that from now on you will write in their voice. If a memory/notes system is available, note the profile location there too.
+Ask once, briefly: "Hast du schon einen Obsidian-Vault oder Notizen-Ordner, den du für sowas nutzt, oder soll ich es einfach lokal speichern?" If they have one, save the profile there as a plain markdown note (Obsidian just reads markdown files from a folder, nothing special needed). Otherwise write it to `~/.claude/voiceprint/<name>-voice.md` (create the folder if needed), using the template below. Either way it is a plain `.md` file, portable, human-readable, and safe to move later.
+
+Tell the person it is saved and that from now on you write in their voice automatically, they never have to ask for it again.
 
 ```markdown
 # Voiceprint — <Name>
