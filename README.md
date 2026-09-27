@@ -11,7 +11,7 @@ Made for creators, operators and anyone who sends a lot of messages and wants th
 ## Install (Claude Code)
 
 ```
-/plugin marketplace add __GHUSER__/voiceprint
+/plugin marketplace add horacioleven8-bit/voiceprint
 /plugin install voiceprint@voiceprint
 ```
 
