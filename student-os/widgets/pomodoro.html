@@ -1,0 +1,35 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+html,body{margin:0;height:100%;font-family:"Helvetica Neue",Arial,sans-serif;color:#fff}
+body{background:
+radial-gradient(ellipse 40% 25% at 15% 20%,#2f4a2c 0,transparent 70%),
+radial-gradient(ellipse 35% 30% at 85% 30%,#273f25 0,transparent 70%),
+radial-gradient(ellipse 45% 25% at 20% 85%,#2b4528 0,transparent 70%),
+radial-gradient(ellipse 30% 35% at 80% 80%,#22381f 0,transparent 70%),
+#121a11;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.modes{display:flex;flex-direction:column;gap:9px;align-items:center}
+.mode{border:1.5px solid #fff;background:transparent;color:#fff;border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;cursor:pointer}
+.mode.on{background:#fff;color:#111}
+#time{font-size:64px;font-weight:700;letter-spacing:-1px;margin:6px 0}
+.ctl{display:flex;align-items:center;gap:10px}
+#start{background:#fff;color:#111;border:0;border-radius:22px;padding:9px 0;width:120px;font-size:15px;font-weight:700;cursor:pointer}
+.ic{background:none;border:0;color:#fff;font-size:26px;cursor:pointer;line-height:1;padding:0}
+#set{display:none;gap:6px;font-size:11px}#set input{width:38px}
+</style></head><body>
+<div class="modes"><button class="mode on" data-k="p">Pomodoro</button><button class="mode" data-k="s">Short Break</button><button class="mode" data-k="l">Long Break</button></div>
+<div id="time">25:00</div>
+<div class="ctl"><button id="start">Start</button><button class="ic" id="reset" title="Reset">&#x21bb;</button><button class="ic" id="gear" title="Settings">&#9881;</button></div>
+<div id="set">P <input id="ip" type="number" value="25"> S <input id="is" type="number" value="5"> L <input id="il" type="number" value="15"></div>
+<script>
+let D={p:25,s:5,l:15},k='p',left=D.p*60,iv=null;
+const $=i=>document.getElementById(i);
+function show(){$('time').textContent=String(Math.floor(left/60)).padStart(2,'0')+':'+String(left%60).padStart(2,'0');}
+function stop(){clearInterval(iv);iv=null;$('start').textContent='Start';}
+function setMode(m){k=m;stop();left=D[k]*60;document.querySelectorAll('.mode').forEach(b=>b.classList.toggle('on',b.dataset.k==k));show();}
+document.querySelectorAll('.mode').forEach(b=>b.onclick=()=>setMode(b.dataset.k));
+$('start').onclick=()=>{if(iv){stop();return;}$('start').textContent='Pause';iv=setInterval(()=>{left--;show();if(left<=0){stop();try{new AudioContext().resume().then(function(){})}catch(e){}setMode(k=='p'?'s':'p');}},1000);};
+$('reset').onclick=()=>setMode(k);
+$('gear').onclick=()=>{$('set').style.display=$('set').style.display=='flex'?'none':'flex';};
+['p','s','l'].forEach(x=>$('i'+x).onchange=e=>{D[x]=Math.max(1,+e.target.value||1);if(k==x)setMode(x);});
+show();
+</script></body></html>
